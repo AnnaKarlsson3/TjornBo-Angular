@@ -29,6 +29,7 @@ namespace backend.Mappers
                     ? new BrokerDto()
                     : new BrokerDto
                     {
+                        Id = houseModel.Broker.Id,
                         Name = houseModel.Broker.Name ?? string.Empty,
                         Email = houseModel.Broker.Email ?? string.Empty,
                         PhoneNumber = houseModel.Broker.PhoneNumber ?? string.Empty,
@@ -40,6 +41,30 @@ namespace backend.Mappers
                     PhoneNumber = o.PhoneNumber
                 }).ToList() 
 
+            };
+        }
+
+
+        public static House ToHouseFromCreateDto(this CreateHouseDto house){
+            return new House{
+                Price = house.Price,
+                Rooms = house.Rooms,
+                SizeM2 = house.SizeM2,
+                Content = house.Content,
+                BrokerId = house.BrokerId,
+                Address = new Address
+                {
+                    Street = house.Address.Street,
+                    City = house.Address.City,
+                    PostalCode = house.Address.PostalCode
+                },
+                Owners = house.Owners.Select(o => new Owner
+                {
+                    Name = o.Name,
+                    IDNumber = o.IDNumber,
+                    Email = o.Email,
+                    PhoneNumber = o.PhoneNumber
+                }).ToList()
             };
         }
     }

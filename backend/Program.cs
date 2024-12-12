@@ -1,4 +1,7 @@
 using backend.data;
+using backend.Interfaces;
+using backend.Repository;
+using backend.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +19,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
 });
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IHouseRepository, HouseRepository>();
+builder.Services.AddScoped<IBrokerRepository, BrokerRepository>();
+builder.Services.AddScoped<IBrokerService, BrokerService>();
+builder.Services.AddScoped<IHouseService, HouseService>();
+
+
 
 var app = builder.Build();
 
