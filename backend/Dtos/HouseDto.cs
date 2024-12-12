@@ -15,6 +15,7 @@ namespace backend.Dtos
     public string Content { get; set; } = string.Empty;
     public AddressDto Address { get; set; } = null!;
     public BrokerDto Broker { get; set; } = null!;
+    public List<OwnerDto> Owners { get; set; } = new List<OwnerDto>();
 }
 
 }

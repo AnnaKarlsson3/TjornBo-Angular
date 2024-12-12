@@ -17,18 +17,28 @@ namespace backend.Mappers
                 Rooms = houseModel.Rooms,
                 SizeM2 = houseModel.SizeM2,
                 Content = houseModel.Content,
-                Address = new AddressDto
+                Address = houseModel.Address == null
+                    ? new AddressDto()
+                    : new AddressDto
+                    {
+                        Street = houseModel.Address.Street ?? string.Empty,
+                        City = houseModel.Address.City ?? string.Empty,
+                        PostalCode = houseModel.Address.PostalCode ?? string.Empty,
+                    },
+                Broker = houseModel.Broker == null
+                    ? new BrokerDto()
+                    : new BrokerDto
+                    {
+                        Name = houseModel.Broker.Name ?? string.Empty,
+                        Email = houseModel.Broker.Email ?? string.Empty,
+                        PhoneNumber = houseModel.Broker.PhoneNumber ?? string.Empty,
+                    },
+                Owners = houseModel.Owners.Select(o => new OwnerDto
                 {
-                    Street = houseModel.Address?.Street ?? string.Empty,
-                    City = houseModel.Address?.City ?? string.Empty,
-                    PostalCode = houseModel.Address.PostalCode ?? string.Empty
-                },
-                Broker = new BrokerDto
-                {
-                    Name = houseModel.Broker?.Name ?? string.Empty,
-                    Email = houseModel.Broker?.Email ?? string.Empty,
-                    PhoneNumber = houseModel.Broker?.PhoneNumber ?? string.Empty
-                }
+                    Name = o.Name,
+                    Email = o.Email,
+                    PhoneNumber = o.PhoneNumber
+                }).ToList() 
 
             };
         }

@@ -19,7 +19,7 @@ namespace backend.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostalCode = table.Column<int>(type: "int", nullable: false)
+                    PostalCode = table.Column<int>(type: "nvarchar(50)", nullable: false)
                 },
                 constraints: table =>
                 {
