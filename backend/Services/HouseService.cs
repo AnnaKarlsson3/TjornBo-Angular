@@ -6,6 +6,7 @@ using backend.Dtos;
 using backend.Interfaces;
 using backend.Mappers;
 using backend.Models;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace backend.Services
 {
@@ -36,14 +37,17 @@ namespace backend.Services
                 return null;
             }
 
-             var broker = await _brokerRepo.Find(house.BrokerId);
+            var broker = await _brokerRepo.Find(house.BrokerId);
 
-            house.Broker = new Broker
+            //TODO -> Nånting är fel här! broker sets ej!
+            //Lägg till broker null check...
+             house.Broker = new Broker
             {
+                Id = broker.Id,
                 Name = broker.Name,
                 Email = broker.Email,
                 PhoneNumber = broker.PhoneNumber
-            };
+            }; 
 
             return house.ToHouseDto();
         }

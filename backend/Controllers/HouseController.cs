@@ -53,7 +53,7 @@ namespace backend.Controllers
         public async Task<IActionResult> Create([FromBody] CreateHouseDto houseDto ){
             var house = await _houseService.CreateHouseWithDetailsAsync(houseDto);
             
-            return CreatedAtAction(nameof(GetById), new {id = house.Id}, house.ToHouseDto);
+            return CreatedAtAction(nameof(GetById), new {id = house.Id}, house.ToHouseDto());
         }
 
 
