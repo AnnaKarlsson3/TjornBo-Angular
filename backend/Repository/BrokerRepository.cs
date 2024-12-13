@@ -16,6 +16,7 @@ namespace backend.Repository
         public BrokerRepository(ApplicationDbContext context){
             _context = context;
         }
+        
         public async Task<Broker?> Find(int Id)
         {
             return await _context.Brokers.FirstOrDefaultAsync(h => h.Id == Id);

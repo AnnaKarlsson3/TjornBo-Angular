@@ -52,8 +52,10 @@ namespace backend.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateHouseDto houseDto ){
             var house = await _houseService.CreateHouseWithDetailsAsync(houseDto);
+
+            return Ok(house);
             
-            return CreatedAtAction(nameof(GetById), new {id = house.Id}, house.ToHouseDto());
+            //return CreatedAtAction(nameof(GetById), new {id = house.Id}, house.ToHouseDto());
         }
 
 

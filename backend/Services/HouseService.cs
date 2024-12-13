@@ -14,12 +14,14 @@ namespace backend.Services
     {
         private readonly IHouseRepository _houseRepo;
         private readonly IBrokerRepository _brokerRepo;
+        private readonly IBrokerService _brokerService;
        
 
-        public HouseService (IHouseRepository houseRepo, IBrokerRepository brokerRepo)
+        public HouseService (IHouseRepository houseRepo, IBrokerRepository brokerRepo, IBrokerService brokerService)
         {
             _houseRepo = houseRepo;
             _brokerRepo = brokerRepo;
+            _brokerService = brokerService;
         }
 
 
@@ -37,26 +39,30 @@ namespace backend.Services
                 return null;
             }
 
-            var broker = await _brokerRepo.Find(house.BrokerId);
+           
+            return house.ToHouseDto();
+        }
 
-            //TODO -> Nånting är fel här! broker sets ej!
-            //Lägg till broker null check...
-             house.Broker = new Broker
+        
+        public async Task<HouseDto> CreateHouseWithDetailsAsync(CreateHouseDto houseDto )
+        {
+            var houseModel = houseDto.ToHouseFromCreateDto();
+            var house = await _houseRepo.SaveChanges(houseModel);   
+
+            var broker = await _brokerService.GetBrokerById(house.BrokerId);
+
+            Console.WriteLine("Namn: {0} och id: {1}", broker.Name, broker.Id);
+
+            /*  house.Broker = new Broker
             {
                 Id = broker.Id,
                 Name = broker.Name,
                 Email = broker.Email,
                 PhoneNumber = broker.PhoneNumber
-            }; 
+            };  */
+
 
             return house.ToHouseDto();
-        }
-
-        
-        public async Task<House> CreateHouseWithDetailsAsync(CreateHouseDto houseDto )
-        {
-            var houseModel = houseDto.ToHouseFromCreateDto();
-            return await _houseRepo.SaveChanges(houseModel);   
         }
     }
 }

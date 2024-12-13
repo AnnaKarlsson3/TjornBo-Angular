@@ -12,7 +12,7 @@ using backend.data;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241212134004_RemoveUniqueConstraintFromBrokerId")]
+    [Migration("20241213133354_RemoveUniqueConstraintFromBrokerId")]
     partial class RemoveUniqueConstraintFromBrokerId
     {
         /// <inheritdoc />

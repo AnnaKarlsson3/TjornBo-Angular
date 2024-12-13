@@ -7,6 +7,7 @@ using backend.Interfaces;
 using backend.Mappers;
 using backend.Models;
 
+
 namespace backend.Services
 { 
     public class BrokerService : IBrokerService
@@ -18,10 +19,10 @@ namespace backend.Services
             _brokerRepo = brokerRepo;
         }
 
-        public async Task<BrokerDto> GetBrokerById(int Id)
+        public async Task<Broker?> GetBrokerById(int Id)
         {
             var broker = await _brokerRepo.Find(Id);
-            return broker.ToBrokerDto();
+            return broker;
         }
 
     }

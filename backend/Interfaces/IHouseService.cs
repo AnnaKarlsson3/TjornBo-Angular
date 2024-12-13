@@ -10,7 +10,7 @@ namespace backend.Interfaces
     public interface IHouseService
     {
         Task<List<HouseDto>> GetAllHousesAsync();
-        Task<House> CreateHouseWithDetailsAsync(CreateHouseDto houseDto);
+        Task<HouseDto> CreateHouseWithDetailsAsync(CreateHouseDto houseDto);
 
         Task<HouseDto> GetHouseById(int id);
     }
